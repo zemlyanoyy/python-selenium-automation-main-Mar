@@ -1,6 +1,8 @@
 from selenium.webdriver.common.by import By
-from behave import given, when, then
+from selenium.webdriver.support import expected_conditions as EC
+from behave import given, when
 from time import sleep
+
 
 
 # SEARCH_INPUT = (By.ID, 'search')
@@ -17,6 +19,10 @@ def open_target_main_page(context):
 def click_on_cart_icon(context):
     context.driver.find_element(*CART_ICON).click()
     sleep(6)
+    # context.wait.until(
+    #     EC.invisibility_of_element_located(CART_ICON),
+    #     message="The cart icon did not disappear"
+    # )
 
 
 @when('Click Sign In')

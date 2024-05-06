@@ -1,6 +1,8 @@
 from selenium.webdriver.common.by import By
-from behave import given, when, then
+from selenium.webdriver.support import expected_conditions as EC
+from behave import when, then
 from time import sleep
+
 
 
 CART_IS_EMPTY_MESSAGE = (By.XPATH, "//*[text()='Your cart is empty']")
@@ -26,13 +28,19 @@ def click_at_add_to_cart_under_image(context):
 @when('Click at Add to cart button from right side navigation menu')
 def click_at_add_to_cart_from_right_menu(context):
     context.driver.find_element(*ADD_TO_CART_RIGHT_SIDE_BTN).click()
-    sleep(6)
+    context.wait.until(
+        EC.invisibility_of_element_located(ADD_TO_CART_RIGHT_SIDE_BTN),
+        message="The Add to cart button from right side nav menu did not disappear"
+    )
 
 
 @when('Click at Decline coverage button')
 def click_at_decline_coverage_button(context):
     context.driver.find_element(*DECLINE_BTN).click()
-    sleep(6)
+    context.wait.until(
+        EC.invisibility_of_element_located(DECLINE_BTN),
+        message="The Decline coverage button did not disappear"
+    )
 
 
 @then('Verify total price is shown')

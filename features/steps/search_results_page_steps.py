@@ -11,7 +11,7 @@ SEARCH_RESULT_SHOWN = (By.XPATH, "//div[@data-test='resultsHeading']")
 def search_product(context, product):
     context.driver.find_element(*SEARCH_INPUT).send_keys(product)
     context.driver.find_element(*SEARCH_BTN).click()
-    sleep(10)
+    sleep(10)   # we will kip this one
 
 
 @then('Search results for {expected_product} are shown')

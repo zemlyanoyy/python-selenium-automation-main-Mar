@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
-from behave import given, when, then
-from time import sleep
+from selenium.webdriver.support import expected_conditions as EC
+from behave import when, then
 
 
 RIGHT_SIDE_SIGN_IN = (By.XPATH, "//span[contains(@class, 'styles__ListItemText')]")
@@ -10,7 +10,10 @@ SIGN_IN_FORM_HEADER = (By.XPATH, "//span[text()='Sign into your Target account']
 @when('From right side navigation menu, click Sign in')
 def click_on_right_side_signin(context):
     context.driver.find_element(*RIGHT_SIDE_SIGN_IN).click()
-    sleep(6)
+    context.wait.until(
+        EC.invisibility_of_element_located(RIGHT_SIDE_SIGN_IN),
+        message="Sign in button from right side nav menu did not disappear"
+    )
 
 
 @then('Verify Sign In form opened')
