@@ -11,4 +11,7 @@ Scenario: User can search for a car on target
     When Search for car
     Then Search results for car are shown
 
-
+Scenario: Verify that user can see product names and images
+    Given Open target main page
+    When Search for AirPods (3rd Generation)
+    Then Verify that every product has a name and an image
