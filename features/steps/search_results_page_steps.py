@@ -13,17 +13,17 @@ PRODUCT_IMG = (By.CSS_SELECTOR, "[class*='ProductCardImage']")
 
 @when('Search for {product}')
 def search_product(context, product):
-    context.driver.find_element(*SEARCH_INPUT).send_keys(product)
-    context.driver.find_element(*SEARCH_BTN).click()
-    sleep(10)   # we will kip this one
 
+    context.app.header.search_product(product)   # context.driver.find_element(*SEARCH_INPUT).send_keys(product)
+    # context.driver.find_element(*SEARCH_BTN).click()
+    # sleep(10)   # we will kip this one
 
 @then('Search results for {expected_product} are shown')
 def verify_search_results_correct(context, expected_product):
-    actual_text = context.driver.find_element(*SEARCH_RESULT_SHOWN).text
-    assert expected_product in actual_text, f"Expected word {expected_product} not in {actual_text}"
-    print("Test Case Passed")
-
+    # actual_text = context.driver.find_element(*SEARCH_RESULT_SHOWN).text
+    # assert expected_product in actual_text, f"Expected word {expected_product} not in {actual_text}"
+    # print("Test Case Passed")
+    context.app.search_reults_page.verify_search_results(expected_product)
 
 @then('Verify that every product has a name and an image')
 def verify_products_name_img(context):
